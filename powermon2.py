@@ -24,6 +24,9 @@ def main():
 				if model in ['CM180','WG-PB12V1']:
 					if model=='CM180':
 						id=1
+						if "power_W" in m:
+							# Sometimes receive very high impossible power values, so cap to a sensible max.
+							m['power_W'] = max(int(m['power_W']), 5000)
 					topic="homeassistant/sensor/{}/{}".format(model,id)
 					print('INFO: Publishing on topic {} message {}'.format(topic, line))
 					publish.single(topic,
