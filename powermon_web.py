@@ -26,6 +26,10 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         """Respond to a GET request."""
         s.send_response(200)
         args = parse_qs(urlparse(s.path).query)
+
+        if s.path == "/data":
+        	
+
         if "graph" not in args:
         	renderHTML(s)
         else:
